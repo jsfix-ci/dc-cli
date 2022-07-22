@@ -70,7 +70,9 @@ export class PublishQueue {
 
     const publish = await this.fetch(publishLink.href, 'POST');
     if (publish.status != 204) {
-      throw new Error(`Failed to start publish: ${publish.statusText} - ${await publish.text()}`);
+      throw new Error(`Failed to start publish: ${/* TODO: JSFIX could not patch the breaking change:
+      Response.statusText no longer sets a default message derived from the HTTP status code*/
+      publish.statusText} - ${await publish.text()}`);
     }
 
     const publishJobInfoHref = publish.headers.get('Location');
